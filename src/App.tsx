@@ -4,20 +4,28 @@ import Clock from './components/Clock';
 function App() {
   const [timesRun, setTimesRun] = useState<number>(0);
 
-  const [pomodoro, setPomodoro] = useState<number>(60 * 10);
+  const [pomodoro, setPomodoro] = useState<number>(60 * 2);
   const [stop, setStop] = useState(60 * 5);
 
   const [timer, setTimer] = useState<number>(pomodoro);
-  const [runPomodoro, setRunPomodoro] = useState<boolean>(false);
+  const [isRunning, setIsRunning] = useState<boolean>(false);
   const [stopActive, setStopActive] = useState<boolean>(false);
   const [shouldBePomodoro, setShouldBePomodoro] = useState<boolean>(true);
+
+  const [showAlert, setShowAlert] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (timesRun % 4 === 0 && timesRun !== 0) {
+      setShowAlert(true);
+    }
+  }, [timesRun]);
 
   useEffect(() => {
     // Since changing state is async and we work with changing the state for conditions
     // we check to see if it should be a pomodoro or a stop timer
     let isPomodoro = shouldBePomodoro;
     // Check if should start the timer
-    if (runPomodoro) {
+    if (isRunning) {
       // If the timer is zero run the logic for changing or keep on counting down
       if (timer === 0) {
         // Check if is running the pomodoro clock then sum the times ran
@@ -42,7 +50,7 @@ function App() {
         }, 1);
       }
     }
-  }, [timer, runPomodoro, stopActive]);
+  }, [timer, isRunning, stopActive]);
 
   return (
     <div className="App">
@@ -52,7 +60,16 @@ function App() {
       </label>
       <p>Times pomodoro ran: {timesRun}</p>
       <Clock time={timer} title={shouldBePomodoro ? 'Pomodoro Time Left' : 'Break Time Left'} />
-      <button onClick={() => setRunPomodoro(true)}>Start</button>
+      <button onClick={() => setIsRunning(true)}>Start</button>
+      <button onClick={() => setIsRunning(false)}>Pause</button>
+      {showAlert ? (
+        <div>
+          <h1>You already completed 4 pomodoro timers, what about a 10 min break?</h1>
+          <button onClick={() => setShowAlert(false)}>Dismiss</button>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
