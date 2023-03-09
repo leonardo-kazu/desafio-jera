@@ -13,31 +13,50 @@ function App() {
   const [stopActive, setStopActive] = useState<boolean>(false);
   const [runStop, setRunStop] = useState<boolean>(false);
 
+  // Use effect for pomodoro timer
   useEffect(() => {
-    if (runPomodoro) {
+    // Checking if the pomodoro has been initiated and the stop timer isn't
+    // running
+    if (runPomodoro && !runStop) {
+      // If the timer has ended reset it and start the stop timer
       if (pomodoroTimer === 0) {
         setPomodoroTimer(pomodoro);
+
+        // Adding the amounts it has ran
         setTimesRun((time) => time + 1);
+
+        // If the stop timer is active enable it
         if (stopActive) {
           setRunStop(true);
         }
+
+        // Stop the timer
         setRunPomodoro(false);
+      } else {
+        // Main timer logic
+        setTimeout(() => {
+          setPomodoroTimer((time) => time - 1);
+        }, 1);
       }
-      setTimeout(() => {
-        setPomodoroTimer((time) => time - 1);
-      }, 1);
     } else {
+      // Reset the timer
       setPomodoroTimer(pomodoro);
     }
-  }, [pomodoroTimer, runPomodoro, stopActive]);
+  }, [pomodoroTimer, runPomodoro, runStop]);
 
+  // Use effect for the stop timer
   useEffect(() => {
+    // Checking if the stop timer should run and is active
     if (runStop && stopActive) {
+      // If the timer has ended, reset it and start the pomodoro
       if (stopTimer === 0) {
-        setRunPomodoro(true);
         setStopTimer(stop);
+        setRunPomodoro(true);
+
+        // Stop the timer
         setRunStop(false);
       } else {
+        // Main timer logic
         setTimeout(() => {
           setStopTimer((time) => time - 1);
         }, 1);
