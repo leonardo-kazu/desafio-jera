@@ -6,7 +6,7 @@ import './styles/App.css';
 function App() {
   const [timesRun, setTimesRun] = useState<number>(0);
 
-  const [pomodoro, setPomodoro] = useState<number>(60 * 2);
+  const [pomodoro, setPomodoro] = useState<number>(60 * 25);
   const [stop, setStop] = useState(60 * 5);
 
   const [timer, setTimer] = useState<number>(pomodoro);
@@ -95,14 +95,14 @@ function App() {
         <div className="select">
           <button
             onClick={() => {
-              if (pomodoro < 60 * 60) setStop((time) => time + 60 * 1);
+              if (pomodoro < 60 * 60) setPomodoro((time) => time + 60 * 1);
             }}>
             <i className="bi bi-arrow-up-circle"></i>
           </button>
           <Clock time={pomodoro} title={'Pomodoro Time'} />
           <button
             onClick={() => {
-              if (pomodoro > 60) setStop((time) => time - 60 * 1);
+              if (pomodoro > 60) setPomodoro((time) => time - 60 * 1);
             }}>
             <i className="bi bi-arrow-down-circle"></i>
           </button>
