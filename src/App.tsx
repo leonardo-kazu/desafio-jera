@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Clock from './components/Clock';
 
-import './App.css';
+import './styles/App.css';
 
 function App() {
   const [timesRun, setTimesRun] = useState<number>(0);
@@ -30,7 +30,7 @@ function App() {
       // setShowAlert(true);
       if (Notification.permission === 'granted') {
         new Notification('Take a break', {
-          body: 'Hey, you have alredy done 4 pomodoro timers, what about a 10 minutes break?',
+          body: 'Hey, you have alredy done 4 pomodoro timers in a row, what about a 10 minutes break?',
         });
       }
     }
@@ -72,16 +72,25 @@ function App() {
 
   return (
     <div className="App">
-      <label htmlFor="useStop">
-        <input type="checkbox" id="useStop" onChange={() => setStopActive((active) => !active)} />
-        Do you want to use a break timer?
-      </label>
-      <p>Times pomodoro ran: {timesRun}</p>
-      <div className="">
-        <Clock time={timer} title={shouldBePomodoro ? 'Pomodoro Time Left' : 'Break Time Left'} />
+      <div className="container left">
+        <></>
       </div>
-      <button onClick={() => setIsRunning(true)}>Start</button>
-      <button onClick={() => setIsRunning(false)}>Pause</button>
+      <div className="container right">
+        <Clock time={timer} title={shouldBePomodoro ? 'Pomodoro Time Left' : 'Break Time Left'} />
+        <div className="buttons">
+          <button onClick={() => setIsRunning(true)}>Start</button>
+          <button onClick={() => setIsRunning(false)}>Pause</button>
+          <label htmlFor="useStop">
+            <input
+              type="checkbox"
+              id="useStop"
+              onChange={() => setStopActive((active) => !active)}
+            />
+            Use break
+          </label>
+        </div>
+        <p className="runs">Times pomodoro ran: {timesRun}</p>
+      </div>
       {/* {showAlert ? (
         <div>
           <h1>You already completed 4 pomodoro timers, what about a 10 min break?</h1>

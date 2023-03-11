@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
 
+import '../styles/Clock.css';
 interface ClockProps {
   time: number;
   title: string;
-  class?: string;
 }
 
 export default function Clock(props: ClockProps) {
@@ -12,9 +12,9 @@ export default function Clock(props: ClockProps) {
 
   return (
     <Fragment>
-      <h1>{props.title}</h1>
-      <span className={props.class}>
-        {min}:{sec < 10 ? '0' + sec.toString() : sec}
+      <h1 className="title">{props.title}</h1>
+      <span className="timer">
+        {min < 10 ? '0' + min.toString() : min}:{sec < 10 ? '0' + sec.toString() : sec}
       </span>
     </Fragment>
   );

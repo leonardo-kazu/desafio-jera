@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+
+.title {
+  font-weight: 300;
+}
+
+.timer {
+  font-family: 'Fjalla One', sans-serif;
+  font-style: italic;
+  font-size: 4rem;
+  color: white;
+  background-color: black;
+  width: 80%;
+  align-self: center;
+  margin: 2rem;
+  border: 5px solid black;
+}

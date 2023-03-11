@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+}
+
+.App {
+  height: 100vh;
+  display: flex;
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  width: 40vw;
+  margin: 10px;
+  border: 1px solid black;
+  height: 300px;
+  justify-content: center;
+}
+
+.right {
+  flex-direction: column;
+}
+
+.buttons {
+  display: flex;
+  column-gap: 40px;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.runs {
+  font-size: larger;
+  margin-top: 1rem;
+}
