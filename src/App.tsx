@@ -37,6 +37,13 @@ function App() {
   }, [timesRun]);
 
   useEffect(() => {
+    if (!isRunning) {
+      if (shouldBePomodoro) setTimer(pomodoro);
+      else setTimer(stop);
+    }
+  }, [pomodoro, stop]);
+
+  useEffect(() => {
     // Since changing state is async and we work with changing the state for conditions
     // we check to see if it should be a pomodoro or a stop timer
     let isPomodoro = shouldBePomodoro;
