@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Clock from './components/Clock';
+
+import './App.css';
 
 function App() {
   const [timesRun, setTimesRun] = useState<number>(0);
@@ -12,11 +14,25 @@ function App() {
   const [stopActive, setStopActive] = useState<boolean>(false);
   const [shouldBePomodoro, setShouldBePomodoro] = useState<boolean>(true);
 
-  const [showAlert, setShowAlert] = useState<boolean>(false);
+  // const [showAlert, setShowAlert] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!Notification) {
+      alert('Desktop notifications not available!');
+    }
+    if (Notification.permission !== 'granted') {
+      Notification.requestPermission();
+    }
+  }, []);
 
   useEffect(() => {
     if (timesRun % 4 === 0 && timesRun !== 0) {
-      setShowAlert(true);
+      // setShowAlert(true);
+      if (Notification.permission === 'granted') {
+        new Notification('Take a break', {
+          body: 'Hey, you have alredy done 4 pomodoro timers, what about a 10 minutes break?',
+        });
+      }
     }
   }, [timesRun]);
 
@@ -28,6 +44,8 @@ function App() {
     if (isRunning) {
       // If the timer is zero run the logic for changing or keep on counting down
       if (timer === 0) {
+        new Audio('./notificationSound.wav').play();
+
         // Check if is running the pomodoro clock then sum the times ran
         if (isPomodoro) {
           setTimesRun((ran) => ran + 1);
@@ -59,17 +77,19 @@ function App() {
         Do you want to use a break timer?
       </label>
       <p>Times pomodoro ran: {timesRun}</p>
-      <Clock time={timer} title={shouldBePomodoro ? 'Pomodoro Time Left' : 'Break Time Left'} />
+      <div className="">
+        <Clock time={timer} title={shouldBePomodoro ? 'Pomodoro Time Left' : 'Break Time Left'} />
+      </div>
       <button onClick={() => setIsRunning(true)}>Start</button>
       <button onClick={() => setIsRunning(false)}>Pause</button>
-      {showAlert ? (
+      {/* {showAlert ? (
         <div>
           <h1>You already completed 4 pomodoro timers, what about a 10 min break?</h1>
           <button onClick={() => setShowAlert(false)}>Dismiss</button>
         </div>
       ) : (
         <></>
-      )}
+      )} */}
     </div>
   );
 }
