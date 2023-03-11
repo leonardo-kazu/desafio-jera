@@ -15,3 +15,8 @@
   margin: 2rem;
   border: 5px solid black;
 }
+
+.clock {
+  display: flex;
+  flex-direction: column;
+}

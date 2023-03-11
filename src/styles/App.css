@@ -16,12 +16,17 @@
   width: 40vw;
   margin: 10px;
   border: 1px solid black;
-  height: 300px;
+  height: 500px;
   justify-content: center;
 }
 
 .right {
   flex-direction: column;
+}
+
+.left {
+  flex-direction: column;
+  align-items: center;
 }
 
 .buttons {
@@ -34,4 +39,19 @@
 .runs {
   font-size: larger;
   margin-top: 1rem;
+}
+
+.select {
+  display: flex;
+  align-items: center;
+  height: 200px;
+}
+
+button {
+  background-color: white;
+  border: 0px solid;
+  font-size: 3.5rem;
+}
+button:hover {
+  cursor: pointer;
 }

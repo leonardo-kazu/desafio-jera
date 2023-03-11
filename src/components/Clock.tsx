@@ -11,11 +11,11 @@ export default function Clock(props: ClockProps) {
   const sec = props.time - min * 60;
 
   return (
-    <Fragment>
+    <div className="clock">
       <h1 className="title">{props.title}</h1>
       <span className="timer">
         {min < 10 ? '0' + min.toString() : min}:{sec < 10 ? '0' + sec.toString() : sec}
       </span>
-    </Fragment>
+    </div>
   );
 }

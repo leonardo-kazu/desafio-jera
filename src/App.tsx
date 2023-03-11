@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Clock from './components/Clock';
 
 import './styles/App.css';
@@ -73,13 +73,48 @@ function App() {
   return (
     <div className="App">
       <div className="container left">
-        <></>
+        <div className="select">
+          <button
+            className="selectors"
+            onClick={() => {
+              if (stop < 60 * 60) setStop((time) => time + 60 * 1);
+            }}>
+            <i className="bi bi-arrow-up-circle"></i>
+          </button>
+          <Clock time={stop} title={'Break Time'} />
+          <button
+            className="selectors"
+            onClick={() => {
+              if (stop > 60) setStop((time) => time - 60 * 1);
+            }}>
+            <i className="bi bi-arrow-down-circle"></i>
+          </button>
+        </div>
+        <div className="select">
+          <button
+            onClick={() => {
+              if (pomodoro < 60 * 60) setStop((time) => time + 60 * 1);
+            }}>
+            <i className="bi bi-arrow-up-circle"></i>
+          </button>
+          <Clock time={pomodoro} title={'Pomodoro Time'} />
+          <button
+            onClick={() => {
+              if (pomodoro > 60) setStop((time) => time - 60 * 1);
+            }}>
+            <i className="bi bi-arrow-down-circle"></i>
+          </button>
+        </div>
       </div>
       <div className="container right">
         <Clock time={timer} title={shouldBePomodoro ? 'Pomodoro Time Left' : 'Break Time Left'} />
         <div className="buttons">
-          <button onClick={() => setIsRunning(true)}>Start</button>
-          <button onClick={() => setIsRunning(false)}>Pause</button>
+          <button onClick={() => setIsRunning(true)}>
+            <i className="bi bi-play-circle"></i>
+          </button>
+          <button onClick={() => setIsRunning(false)}>
+            <i className="bi bi-pause-circle"></i>
+          </button>
           <label htmlFor="useStop">
             <input
               type="checkbox"
