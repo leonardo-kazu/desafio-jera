@@ -29,11 +29,12 @@
   align-items: center;
 }
 
-.buttons {
+.options {
   display: flex;
   column-gap: 40px;
   justify-content: center;
   margin-bottom: 0.5rem;
+  align-items: center;
 }
 
 .runs {

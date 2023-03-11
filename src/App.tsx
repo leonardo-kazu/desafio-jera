@@ -30,7 +30,7 @@ function App() {
       // setShowAlert(true);
       if (Notification.permission === 'granted') {
         new Notification('Take a break', {
-          body: 'Hey, you have alredy done 4 pomodoro timers in a row, what about a 10 minutes break?',
+          body: 'Hey, you have alredy done 4 pomodoro timers in a row, what about a 10 minute break?',
         });
       }
     }
@@ -65,7 +65,7 @@ function App() {
       } else {
         setTimeout(() => {
           setTimer((time) => time - 1);
-        }, 1);
+        }, 1000);
       }
     }
   }, [timer, isRunning, stopActive]);
@@ -73,6 +73,7 @@ function App() {
   return (
     <div className="App">
       <div className="container left">
+        {/* Break timer time selections */}
         <div className="select">
           <button
             className="selectors"
@@ -90,6 +91,7 @@ function App() {
             <i className="bi bi-arrow-down-circle"></i>
           </button>
         </div>
+        {/* Pomodoro timer time selections */}
         <div className="select">
           <button
             onClick={() => {
@@ -108,7 +110,8 @@ function App() {
       </div>
       <div className="container right">
         <Clock time={timer} title={shouldBePomodoro ? 'Pomodoro Time Left' : 'Break Time Left'} />
-        <div className="buttons">
+        {/* Play/Pause/UseBreak options */}
+        <div className="options">
           <button onClick={() => setIsRunning(true)}>
             <i className="bi bi-play-circle"></i>
           </button>
